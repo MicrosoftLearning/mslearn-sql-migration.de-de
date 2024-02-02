@@ -15,7 +15,7 @@ Diese Übung dauert ungefähr **15** Minuten.
 
 Um diese Übung durchführen zu können, müssen Sie sicherstellen, dass Sie die folgenden Voraussetzungen erfüllen, bevor Sie fortfahren:
 
-- Sie benötigen SQL Server 2019 oder eine neuere Version zusammen mit der [**AdventureWorksLT**](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms)-Datenbank, die mit Ihrer spezifischen SQL Server-Instanz kompatibel ist.
+- Sie benötigen SQL Server 2019 oder eine neuere Version zusammen mit der [**AdventureWorksLT**](https://learn.microsoft.com/sql/samples/adventureworks-install-configure#download-backup-files)-Datenbank, die mit Ihrer spezifischen SQL Server-Instanz kompatibel ist.
 - Laden Sie [Azure Data Studio](https://learn.microsoft.com/sql/azure-data-studio/download-azure-data-studio) herunter und installieren Sie es. Wenn sie bereits installiert ist, aktualisieren Sie es, um sicherzustellen, dass Sie die neueste Version verwenden.
 - Ein*e SQL-Benutzer*in mit Lesezugriff auf die Quelldatenbank.
 
@@ -23,23 +23,23 @@ Um diese Übung durchführen zu können, müssen Sie sicherstellen, dass Sie die
 
 1. Wählen Sie die Windows-Startschaltfläche aus, und geben Sie „SSMS“ ein. Wählen Sie **Microsoft SQL Server Management Studio 18** aus der Liste aus.  
 
-1. Wenn SSMS geöffnet wird, beachten Sie, dass das Dialogfeld **Mit Server verbinden** mit dem Standardinstanznamen vorausgefüllt ist. Wählen Sie **Verbinden**.
+1. Wenn SSMS geöffnet wird, beachten Sie, dass das Dialogfeld **Mit Server verbinden** mit dem Standardinstanznamen vorausgefüllt ist. Wählen Sie **Verbinden** aus.
 
 1. Wählen Sie den Ordner **Datenbanken**, und dann **Neue Abfrage**.
 
-1. Kopieren Sie im neuen Abfragefenster die folgende T-SQL und fügen Sie sie ein. Führen Sie die Abfrage aus, um die Datenbank wiederherzustellen.
+1. Kopieren Sie im neuen Abfragefenster die folgende T-SQL und fügen Sie sie ein. Vergewissern Sie sich, dass der Name und der Pfad der Datenbanksicherungsdatei mit Ihrer tatsächlichen Sicherungsdatei übereinstimmen. Ist dies nicht der Fall, schlägt der Befehl fehl. Führen Sie die Abfrage aus, um die Datenbank wiederherzustellen.
 
     ```sql
     RESTORE DATABASE AdventureWorksLT
-    FROM DISK = 'C:\LabFiles\AdventureWorksLT2019.bak'
+    FROM DISK = 'C:\<FolderName>\AdventureWorksLT2019.bak'
     WITH RECOVERY,
           MOVE 'AdventureWorksLT2019_Data' 
-            TO 'C:\LabFiles\AdventureWorksLT2019.mdf',
+            TO 'C:\<FolderName>\AdventureWorksLT2019.mdf',
           MOVE 'AdventureWorksLT2019_Log'
-            TO 'C:\LabFiles\AdventureWorksLT2019.ldf';
+            TO 'C:\<FolderName>\AdventureWorksLT2019.ldf';
     ```
 
-    > **Hinweis**: Stellen Sie sicher, dass der Name der Datenbanksicherungsdatei und der Pfad im obigen Beispiel Ihrer tatsächlichen Sicherungsdatei entsprechen. Ist dies nicht der Fall, kann der Befehl fehlschlagen.
+    > **Hinweis:** Stellen Sie sicher, dass Sie über die einfache [AdventureWorks-Sicherungsdatei](https://learn.microsoft.com/sql/samples/adventureworks-install-configure#download-backup-files) auf dem SQL Server-Computer verfügen, bevor Sie den T-SQL-Befehl ausführen.
 
 1. Nach Abschluss der Wiederherstellung sollte eine erfolgreiche Meldung angezeigt werden.
 
@@ -61,7 +61,7 @@ Folgen Sie diesen Schritten, um die Migrationserweiterung zu installieren. Wenn 
 
 1. Geben Sie auf der neuen Registerkarte **Verbindung** den Servernamen ein. Wählen Sie **Optional (False)** für die Option **Encrypt**.
 
-1. Wählen Sie **Verbinden**. 
+1. Wählen Sie **Verbinden** aus. 
 
 1. Um die Azure-Migrationserweiterung zu starten, klicken Sie einfach mit der rechten Maustaste auf den Namen der Quellinstanz und wählen **Verwalten**. 
 

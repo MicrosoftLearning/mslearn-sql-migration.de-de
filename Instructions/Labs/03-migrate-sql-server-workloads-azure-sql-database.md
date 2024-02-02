@@ -32,23 +32,23 @@ Stellen wir die Datenbank *AdventureWorksLT* auf der SQL Server-Instanz wieder h
 
 1. Wählen Sie die Windows-Startschaltfläche aus, und geben Sie „SSMS“ ein. Wählen Sie **Microsoft SQL Server Management Studio 18** aus der Liste aus.  
 
-1. Wenn SSMS geöffnet wird, beachten Sie, dass das Dialogfeld **Mit Server verbinden** mit dem Standardinstanznamen vorausgefüllt ist. Wählen Sie **Verbinden**.
+1. Wenn SSMS geöffnet wird, beachten Sie, dass das Dialogfeld **Mit Server verbinden** mit dem Standardinstanznamen vorausgefüllt ist. Wählen Sie **Verbinden** aus.
 
 1. Wählen Sie den Ordner **Datenbanken**, und dann **Neue Abfrage**.
 
-1. Kopieren Sie im neuen Abfragefenster die folgende T-SQL und fügen Sie sie ein. Führen Sie die Abfrage aus, um die Datenbank wiederherzustellen.
+1. Kopieren Sie im neuen Abfragefenster die folgende T-SQL und fügen Sie sie ein. Vergewissern Sie sich, dass der Name und der Pfad der Datenbanksicherungsdatei mit Ihrer tatsächlichen Sicherungsdatei übereinstimmen. Ist dies nicht der Fall, schlägt der Befehl fehl. Führen Sie die Abfrage aus, um die Datenbank wiederherzustellen.
 
     ```sql
     RESTORE DATABASE AdventureWorksLT
-    FROM DISK = 'C:\LabFiles\AdventureWorksLT2019.bak'
+    FROM DISK = 'C:\<FolderName>\AdventureWorksLT2019.bak'
     WITH RECOVERY,
           MOVE 'AdventureWorksLT2019_Data' 
-            TO 'C:\LabFiles\AdventureWorksLT2019.mdf',
+            TO 'C:\<FolderName>\AdventureWorksLT2019.mdf',
           MOVE 'AdventureWorksLT2019_Log'
-            TO 'C:\LabFiles\AdventureWorksLT2019.ldf';
+            TO 'C:\<FolderName>\AdventureWorksLT2019.ldf';
     ```
 
-    > **Hinweis**: Stellen Sie sicher, dass der Name der Datenbanksicherungsdatei und der Pfad im obigen Beispiel ihrer tatsächlichen Sicherungsdatei entsprechen. Ist dies nicht der Fall, kann der Befehl fehlschlagen.
+    > **Hinweis:** Stellen Sie sicher, dass Sie über die einfache [AdventureWorks-Sicherungsdatei](https://learn.microsoft.com/sql/samples/adventureworks-install-configure#download-backup-files) auf dem SQL Server-Computer verfügen, bevor Sie den T-SQL-Befehl ausführen.
 
 1. Nach Abschluss der Wiederherstellung sollte eine erfolgreiche Meldung angezeigt werden.
 
@@ -74,9 +74,9 @@ Lassen Sie uns eine Azure SQL-Datenbank einrichten, die als Zielumgebung dienen 
 
 1. Wählen Sie auf der Seite **SQL-Datenbank erstellen** die folgenden Optionen.
 
-    - **Abonnement:**&lt;Ihr Abonnement&gt;
+    - **Abonnement:** &lt;Ihr Abonnement&gt;
     - **Ressourcengruppe:**&lt;Ihre Ressourcengruppe&gt;
-    - Datenbankname: **AdventureWorksLT**
+    - **Datenbankname**: AdventureWorksLT
     - **Server:** Wählen Sie den Link **Neuen erstellen**. Geben Sie die Serverdetails auf der Seite **SQL-Datenbankserver erstellen** an.
         - **Servername:**&lt;Wählen Sie einen Servernamen&gt; aus. Der Servername muss global eindeutig sein.
         - **Standort:**&lt;Dieselbe Region wie Ihre Ressourcengruppe&gt;
@@ -92,7 +92,7 @@ Lassen Sie uns eine Azure SQL-Datenbank einrichten, die als Zielumgebung dienen 
 
 1. Wählen Sie auf **Compute + Speicher** die Option **Datenbank konfigurieren** aus. Auf der Seite **Konfigurieren** wählen Sie im Dropdown-Menü **Dienstebene** die Option **Basic** und dann **Anwenden**.
 
-1. Für die Option **Sicherungsspeicherredundanz** behalten Sie den Standardwert bei: **Georedundanter Sicherungsspeicher**. Klicken Sie auf **Weiter: Netzwerk**.
+1. Für die Option **Sicherungsspeicherredundanz** behalten Sie den Standardwert bei: **Georedundanter Sicherungsspeicher**. Klicken Sie auf **Weiter: Netzwerk** aus.
 
 1. Wählen Sie auf der Registerkarte **Netzwerke** die Option **Weiter: Sicherheit**, und dann **Weiter: Zusätzliche Einstellungen**.
 
@@ -132,7 +132,7 @@ Bevor Sie mit der Azure-Migrationserweiterung beginnen, stellen wir eine Verbind
 
 1. Wählen Sie unter **Authentifizierungstyp** die Option **SQL-Anmeldung** und geben Sie den Benutzernamen und das Kennwort ein.
 
-1. Wählen Sie **Verbinden**.
+1. Wählen Sie **Verbinden** aus.
 
 ## Installieren und Ausführen der Azure-Migrationserweiterung für Azure Data Studio
 
@@ -162,7 +162,7 @@ Bevor wir mit der Migration beginnen, müssen wir sicherstellen, dass das Schema
 
 1. Geben Sie auf der Registerkarte **Quelle auswählen** den Namen der SQL Server-Quellinstanz ein, und wählen Sie **Windows-Authentifizierung** für **Authentifizierungstyp**. Deaktivieren Sie die Option **Verbindung verschlüsseln**. 
 
-1. Wählen Sie **Verbinden**.
+1. Wählen Sie **Verbinden** aus.
 
 1. Wählen Sie die Datenbank **AdventureWorksLT** und wählen Sie dann **Weiter**.
 
