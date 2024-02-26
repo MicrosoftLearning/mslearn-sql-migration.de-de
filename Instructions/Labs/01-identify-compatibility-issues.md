@@ -79,21 +79,19 @@ Sie führen die Azure-Migrationserweiterung für Azure Data Studio aus, führen 
 
 1. Wählen Sie unter **Schritt 1: Datenbanken für die Bewertung** die *AdventureWorks*-Datenbank und dann **Weiter** aus.
 
-1. Warten Sie unter **Schritt 2: Bewertungsergebnisse und Empfehlungen**, bis die Bewertung abgeschlossen wurde.
+1. In **Schritt 2: Bewertungsergebnisse und SKU-Empfehlungen** warten Sie, bis die Bewertung abgeschlossen ist, und wählen Sie **Weiter** aus.
 
 ## Überprüfen der Bewertungsergebnisse
 
 Sie können nun die von der Migrationserweiterung generierten Empfehlungen überprüfen.
 
-1. Unter **Schritt 2: Bewertungsergebnisse und Empfehlungen** wählen Sie **Azure SQL-Datenbank** als Zielplattform aus.
-
-1. Wählen Sie unten auf der Seite **Ansicht/Auswählen** aus, um die Bewertungsergebnisse anzuzeigen. 
+1. In **Schritt 3: Zielplattform und Bewertungsergebnisse** wählen Sie **Azure SQL-Datenbank** als Zielplattform aus.
 
 1. Wählen Sie die *AdventureWorks*-Datenbank aus. Nehmen Sie sich einen Moment Zeit, um die Bewertungsergebnisse auf der rechten Seite zu überprüfen.
     
     > **Hinweis:** Wir sehen, dass die zuvor hinzugefügte Spalte `Next` markiert wurde, da sie zu einem Fehler in der Azure SQL-Datenbank führen kann.
 
-1. Wählen Sie **Abbrechen** aus, und wählen Sie stattdessen **Azure SQL Managed Instance** als **Azure SQL**-Zielplattform aus.
+1. Wählen Sie stattdessen **Azure SQL Managed Instance** als **Azure SQL-Datenbank**-Zielplattform aus.
     
     > **Hinweis:** Die Spalte `Next` ist für Azure SQL Managed Instance nicht mehr gekennzeichnet, woran liegt das? 
     >
@@ -111,12 +109,12 @@ Sie können nun die von der Migrationserweiterung generierten Empfehlungen über
     ALTER TABLE [SalesLT].[Customer] DROP COLUMN [Next];
     ```
 
-1. Gehen Sie zurück zur Seite **Schritt 2: Bewertungsergebnisse und Empfehlungen** im Assistenten und wählen Sie **Bewertung aktualisieren**.
+1. Kehren Sie zurück zu **Schritt 2: Bewertungsergebnisse und SKU-Empfehlungen** im Assistenten, und wählen Sie **Bewertung aktualisieren** aus.
 
-1. Wählen Sie **Azure SQL-Datenbank** als **Azure SQL**-Zielplattform.
+1. Wählen Sie **Azure SQL-Datenbank** als Zielplattform aus.
 
-1. Wählen Sie **Anzeigen/Auswählen** aus, um die Bewertungsergebnisse anzuzeigen.
+1. Wählen Sie die *AdventureWorks*-Datenbank aus.
 
-    > **Hinweis:** Das Problem ist nicht mehr gekennzeichnet.
+    > **Hinweis:** Die Datenbank ist bereit für die Migration.
 
 Sie haben gelernt, wie Sie die Bereitschaft einer SQL Server-Datenbank für die Migration zu Azure SQL-Datenbank bewerten können. Indem Sie Kompatibilitätsprobleme beheben und wichtige Schemaänderungen vornehmen oder diese melden, haben Sie einen wichtigen Schritt unternommen, um potenzielle technische Probleme zu beheben, die in Zukunft in Azure SQL-Datenbank auftreten könnten.
