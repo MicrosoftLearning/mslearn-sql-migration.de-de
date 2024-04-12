@@ -150,36 +150,6 @@ Folgen Sie diesen Schritten, um die Migrationserweiterung zu installieren. Wenn 
 
     > **Hinweis**: Wenn **Azure SQL Migration** in der Seitenleiste des Server-Dashboards nicht sichtbar ist, öffnen Sie Azure Data Studio erneut.
  
-## Generieren des Datenbankschemas mit DMA
-
-Bevor wir mit der Migration beginnen, müssen wir sicherstellen, dass das Schema in der Zieldatenbank vorhanden ist. Wir verwenden DMA, um das Schema aus der Quelle zu erstellen und auf das Ziel anzuwenden.
-
-1. Starten Sie den Datenmigrations-Assistenten.
-
-1. Erstellen Sie ein neues Migrationsprojekt, setzen Sie den Quelltyp auf **SQL Server**, den Zielservertyp auf **Azure SQL-Datenbank** und den Migrationsbereich auf **Nur Schema**. Klicken Sie auf **Erstellen**.
-
-    ![Screenshot: Initiieren eines neuen Migrationsprojekts im Datenmigrations-Assistenten.](../media/3-data-migration-schema.png) 
-
-1. Geben Sie auf der Registerkarte **Quelle auswählen** den Namen der SQL Server-Quellinstanz ein, und wählen Sie **Windows-Authentifizierung** für **Authentifizierungstyp**. Deaktivieren Sie die Option **Verbindung verschlüsseln**. 
-
-1. Wählen Sie **Verbinden** aus.
-
-1. Wählen Sie die Datenbank **AdventureWorksLT** und wählen Sie dann **Weiter**.
-
-1. Geben Sie auf der Registerkarte **Ziel auswählen** den Namen des Azure SQL-Zielservers ein, wählen Sie **SQL-Server-Authentifizierung** für **Authentifizierungstyp** und geben Sie die SQL-Benutzeranmeldeinformationen ein. 
-
-1. Wählen Sie die Datenbank **AdventureWorksLT** und wählen Sie dann **Weiter**.
-
-1. Wählen Sie auf der Registerkarte **Objekte auswählen** alle Schemaobjekte aus der Quelldatenbank aus. Wählen Sie **SQL-Skript generieren** aus. 
-
-    ![Screenshot: Registerkarte „Objekte auswählen“ im Datenmigrations-Assistenten.](../media/3-data-migration-generate.png)
-
-1. Nachdem das Schema generiert wurde, nehmen Sie sich etwas Zeit, um es zu überprüfen. Im Allgemeinen umfasst dieser Schritt alle erforderlichen Anpassungen des Skripts für Objekte, die nicht in ihrem aktuellen Zustand am Zielspeicherort erstellt werden können, was in diesem Szenario nicht der Fall ist.
- 
-1. Sie können das Skript manuell mit Azure Data Studio, SQL Management Studio oder durch Auswählen des **Bereitstellungsschemas** ausführen. Fahren Sie mit einer der Methoden fort.
-
-    ![Screenshot: Generiertes Skript im Datenmigrations-Assistenten.](../media/3-data-migration-script.png)
-
 ## Durchführen einer Offlinemigration einer SQL Server-Datenbank zu einer Azure SQL-Datenbank
 
 Wir sind jetzt bereit, die Daten zu migrieren. Folgen Sie diesen Schritten, um eine Offlinemigration mit Azure Data Studio durchzuführen.
@@ -188,21 +158,23 @@ Wir sind jetzt bereit, die Daten zu migrieren. Folgen Sie diesen Schritten, um e
 
 1. Wählen Sie unter **Schritt 1: Datenbanken für die Bewertung** die *AdventureWorks*-Datenbank und dann **Weiter** aus.
 
-1. Warten Sie unter **Schritt 2: Bewertungsergebnisse und Empfehlungen**, bis die Bewertung abgeschlossen ist, und wählen Sie dann **Azure SQL-Datenbank** als **Azure SQL**-Ziel.
+1. In **Schritt 2: Bewertungszusammenfassung und SKU-Empfehlungen** warten Sie, bis die Bewertung abgeschlossen ist, und sehen Sie sich dann die Ergebnisse an. Wählen Sie **Weiter** aus.
 
-1. Wählen Sie unten auf der Seite **Schritt 2: Bewertungsergebnisse und Empfehlungen** die Option **Anzeigen/Auswählen**, um die Bewertungsergebnisse anzuzeigen. Wählen Sie die zu migrierende Datenbank aus.
+1. In **Schritt 3: Zielplattform und Bewertungsergebnisse** wählen Sie die Datenbank aus, um die Bewertungsergebnisse anzuzeigen.
 
     > **Hinweis**: Nehmen Sie sich einen Moment Zeit, um die Bewertungsergebnisse auf der rechten Seite zu überprüfen.
 
-1. Bei **Schritt 3: Azure SQL-Ziel**, wenn das Konto noch nicht verknüpft ist, stellen Sie sicher, dass Sie ein Konto hinzufügen, indem Sie den Link **Konto verknüpfen** auswählen. Wählen Sie dann ein Azure-Konto, einen AD-Mandanten, ein Abonnement, einen Standort, eine Ressourcengruppe, einen Azure SQL-Datenbank-Server und Anmeldeinformationen der Azure SQL-Datenbank aus.
+1. Wählen Sie oben auf der Seite **Schritt 3: Zielplattform und Bewertungsergebnisse** als **Azure SQL**-Ziel **Azure SQL-Datenbank** aus.
+
+1. In **Schritt 4: Azure SQL-Ziel**, wenn das Konto noch nicht verknüpft ist, fügen Sie ein Konto hinzu. Wählen Sie dazu einfach den Link **Konto verknüpfen** aus. Wählen Sie dann ein Azure-Konto, einen AD-Mandanten, ein Abonnement, einen Standort, eine Ressourcengruppe, einen Azure SQL-Datenbank-Server und Anmeldeinformationen der Azure SQL-Datenbank aus.
 
 1. Wählen Sie **Verbinden**, und wählen Sie dann die *AdventureWorks*-Datenbank als **Zieldatenbank**. Wählen Sie **Weiter** aus.
 
-1. Auf **Schritt 4: Azure Database Migration Service** wählen Sie den Link **Neu erstellen**, um mit dem Assistenten einen neuen Azure Database Migration Service zu erstellen. Führen Sie die vom Assistenten bereitgestellten Schritte aus, um eine neue selbst gehostete Integration Runtime einzurichten. Wenn Sie bereits einen solchen erstellt haben, können Sie ihn wiederverwenden.
+1. Wählen Sie in **Schritt 5: Azure Database Migration Service** den Link **Neu erstellen** aus, um mithilfe des Assistenten einen neuen Azure Database Migration Service zu erstellen. Führen Sie die vom Assistenten bereitgestellten Schritte aus, um eine neue selbst gehostete Integration Runtime einzurichten. Wenn Sie bereits einen solchen erstellt haben, können Sie ihn wiederverwenden.
 
-1. Auf **Schritt 5: Datenquellenkonfiguration** geben Sie die Anmeldeinformationen ein, um eine Verbindung zur SQL Server-Instanz von der selbst gehosteten Integration Runtime aus herzustellen. 
+1. Geben Sie in **Schritt 6: Konfiguration der Datenquelle** die Anmeldeinformationen ein, um über die selbstgehostete Integration Runtime eine Verbindung mit der SQL Server-Instanz herzustellen. 
 
-1. Wählen Sie alle Tabellen aus, die von der Quelle zum Ziel migriert werden sollen. 
+1. Wählen Sie alle Tabellen aus, die von der Quelle zum Ziel migriert werden sollen, und aktivieren Sie die Option **Fehlendes Schema migrieren**.
 
 1. Wählen Sie **Überprüfung ausführen**.
 
@@ -210,7 +182,7 @@ Wir sind jetzt bereit, die Daten zu migrieren. Folgen Sie diesen Schritten, um e
 
 1. Wählen Sie nach Abschluss der Überprüfung **Weiter**.
 
-1. Wählen Sie unter **Schritt 6: Zusammenfassung** die Option **Migration starten**.
+1. Wählen Sie in **Schritt 7: Zusammenfassung** die Option **Migration starten** aus.
 
 1. Wählen Sie **Datenbankmigrationen in Bearbeitung** im Migrationsdashboard, um den Migrationsstatus anzuzeigen. 
 
