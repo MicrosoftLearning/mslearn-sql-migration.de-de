@@ -22,6 +22,7 @@ Um diese Übung auszuführen, benötigen Sie Folgendes:
 | **Quellserver** | Eine Instanz von SQL Server 2019 oder eine [neuere Version](https://www.microsoft.com/en-us/sql-server/sql-server-downloads), die auf einem Server Ihrer Einstellung installiert ist. |
 | **Quelldatenbank** | Die einfache [AdventureWorks](https://learn.microsoft.com/sql/samples/adventureworks-install-configure)-Datenbank, die auf der SQL Server-Instanz wiederhergestellt werden soll. |
 | **Azure Data Studio** | Installieren Sie [Azure Data Studio](https://learn.microsoft.com/sql/azure-data-studio/download-azure-data-studio) auf demselben Server, auf dem sich die Quelldatenbank befindet. Wenn sie bereits installiert ist, aktualisieren Sie es, um sicherzustellen, dass Sie die neueste Version verwenden. |
+| **Microsoft Data Migration Assistant** | Installieren Sie den [Datenmigrations-Assistent](https://www.microsoft.com/en-us/download/details.aspx?id=53595) auf demselben Server, auf dem sich die Quelldatenbank befindet. |
 | **Microsoft.DataMigration**-Ressourcenanbieter | Stellen Sie sicher, dass das Abonnement für die Verwendung des Namespace **Microsoft.DataMigration** registriert ist. Wie Sie die Registrierung eines Ressourcenanbieters durchführen, erfahren Sie unter [Registrieren des Ressourcenanbieters](https://learn.microsoft.com/azure/dms/quickstart-create-data-migration-service-portal#register-the-resource-provider). |
 | **Microsoft Integration Runtime** | Installieren Sie [Microsoft Integration Runtime](https://aka.ms/sql-migration-shir-download). |
 
@@ -91,7 +92,11 @@ Lassen Sie uns eine Azure SQL-Datenbank einrichten, die als Zielumgebung dienen 
 
 1. Wählen Sie auf **Compute + Speicher** die Option **Datenbank konfigurieren** aus. Auf der Seite **Konfigurieren** wählen Sie im Dropdown-Menü **Dienstebene** die Option **Basic** und dann **Anwenden**.
 
-1. Für die Option **Sicherungsspeicherredundanz** behalten Sie den Standardwert bei: **Georedundanter Sicherungsspeicher**. Klicken Sie auf **Überprüfen + erstellen**.
+1. Für die Option **Sicherungsspeicherredundanz** behalten Sie den Standardwert bei: **Georedundanter Sicherungsspeicher**. Klicken Sie auf **Weiter: Netzwerk** aus.
+
+1. Wählen Sie auf der Registerkarte **Netzwerke** die Option **Weiter: Sicherheit**, und dann **Weiter: Zusätzliche Einstellungen**.
+
+1. Wählen Sie auf der Seite **Zusätzliche Einstellungen** die Option **Überprüfen + Erstellen**.
 
 1. Überprüfen Sie die Einstellungen und wählen Sie dann **Erstellen**.
 
@@ -151,31 +156,31 @@ Wir sind jetzt bereit, die Daten zu migrieren. Folgen Sie diesen Schritten, um e
 
 1. Starten Sie den Assistenten **Zu Azure SQL migrieren** innerhalb der Erweiterung in Azure Data Studio, und wählen Sie dann **Zu Azure SQL migrieren**.
 
-1. Wählen Sie in **Schritt 1: Datenbanken für die Bewertung** die Datenbank *AdventureWorksLT* und dann **Weiter** aus.
+1. Wählen Sie unter **Schritt 1: Datenbanken für die Bewertung** die *AdventureWorks*-Datenbank und dann **Weiter** aus.
 
 1. In **Schritt 2: Bewertungszusammenfassung und SKU-Empfehlungen** warten Sie, bis die Bewertung abgeschlossen ist, und sehen Sie sich dann die Ergebnisse an. Wählen Sie **Weiter** aus.
 
-1. In **Schritt 3: Zielplattform und Bewertungsergebnisse** wählen Sie **Azure SQL-Datenbank** als Zieltyp aus. Wählen Sie nach der Überprüfung der Bewertungsergebnisse **Weiter** aus.
+1. In **Schritt 3: Zielplattform und Bewertungsergebnisse** wählen Sie die Datenbank aus, um die Bewertungsergebnisse anzuzeigen.
 
-1. In **Schritt 4: Azure SQL-Ziel**, wenn das Konto noch nicht verknüpft ist, fügen Sie ein Konto hinzu. Wählen Sie dazu einfach den Link **Konto verknüpfen** aus. Wählen Sie dann ein Azure-Konto, einen Microsoft Entra-Mandanten, ein Abonnement, einen Standort, eine Ressourcengruppe, einen Azure SQL-Datenbankserver und die Anmeldedaten der Azure SQL-Datenbank aus.
+    > **Hinweis**: Nehmen Sie sich einen Moment Zeit, um die Bewertungsergebnisse auf der rechten Seite zu überprüfen.
 
-1. Wählen Sie **Verbinden** aus, und wählen Sie dann die Datenbank *AdventureWorksLT* als **Zieldatenbank** aus. Wählen Sie **Weiter** aus.
+1. Wählen Sie oben auf der Seite **Schritt 3: Zielplattform und Bewertungsergebnisse** als **Azure SQL**-Ziel **Azure SQL-Datenbank** aus.
+
+1. In **Schritt 4: Azure SQL-Ziel**, wenn das Konto noch nicht verknüpft ist, fügen Sie ein Konto hinzu. Wählen Sie dazu einfach den Link **Konto verknüpfen** aus. Wählen Sie dann ein Azure-Konto, einen AD-Mandanten, ein Abonnement, einen Standort, eine Ressourcengruppe, einen Azure SQL-Datenbank-Server und Anmeldeinformationen der Azure SQL-Datenbank aus.
+
+1. Wählen Sie **Verbinden**, und wählen Sie dann die *AdventureWorks*-Datenbank als **Zieldatenbank**. Wählen Sie **Weiter** aus.
 
 1. Wählen Sie in **Schritt 5: Azure Database Migration Service** den Link **Neu erstellen** aus, um mithilfe des Assistenten einen neuen Azure Database Migration Service zu erstellen. Führen Sie die vom Assistenten bereitgestellten Schritte aus, um eine neue selbst gehostete Integration Runtime einzurichten. Wenn Sie bereits einen solchen erstellt haben, können Sie ihn wiederverwenden.
 
-1. Geben Sie in **Schritt 6: Konfiguration der Datenquelle** die Anmeldeinformationen ein, um über die selbstgehostete Integration Runtime eine Verbindung mit der SQL Server-Instanz herzustellen.
+1. Geben Sie in **Schritt 6: Konfiguration der Datenquelle** die Anmeldeinformationen ein, um über die selbstgehostete Integration Runtime eine Verbindung mit der SQL Server-Instanz herzustellen. 
 
-1. Wählen Sie **Bearbeiten** für die *AdventureWorksLT*-Datenbank aus. 
-
-1. Aktivieren Sie die Option **Schema auf Ziel migrieren**, und vergewissern Sie sich, dass alle Tabellen auf der Registerkarte **Im Ziel nicht vorhanden** ausgewählt sind. Wählen Sie **Aktualisieren**.
+1. Wählen Sie alle Tabellen aus, die von der Quelle zum Ziel migriert werden sollen, und aktivieren Sie die Option **Fehlendes Schema migrieren**.
 
 1. Wählen Sie **Überprüfung ausführen**.
 
     ![Screenshot des Schritts „Überprüfung ausführen“ in der Azure-Migrationserweiterung für Azure Data Studio.](../media/3-run-validation.png) 
 
-1. Wählen Sie nach Abschluss der Überprüfung die Option **Fertig** aus.
-
-1. Wählen Sie **Weiter** aus.
+1. Wählen Sie nach Abschluss der Überprüfung **Weiter**.
 
 1. Wählen Sie in **Schritt 7: Zusammenfassung** die Option **Migration starten** aus.
 
