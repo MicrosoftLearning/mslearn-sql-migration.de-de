@@ -1,115 +1,100 @@
 ---
 lab:
-  title: Vergleichen der lokalen Azure-Kosten für die Migration
+  title: Vergleichen der Azure-Kosten für die Migration
 ---
 
-# Vergleichen der lokalen Azure-Kosten für die Migration
+# Vergleichen der Azure-Kosten für die Migration
 
-Die Gesamtkosten (Total Cost of Ownership, TCO) sind ein Tool, das Sie während eines Projekts zur Modernisierung der Datenplattform verwenden können, um den Kostenunterschied zu ermitteln, der mit der Migration erzielt werden kann.
+Der Azure-Preisrechner ist ein nützliches Tool, das Sie während eines Projekts für die Datenplattformmodernisierung verwenden können, um die Kosten verschiedener Azure-Dienste und Migrationsansätze zu schätzen.
 
-In Ihrem globalen Einzelhandelsunternehmen sollen durch die Modernisierung der Datenplattform erhebliche Einsparungen erzielt werden, aber der Vorstand hat Sie gebeten, die Einsparungen so genau wie möglich zu schätzen.
+In Ihrem globalen Einzelhandelsunternehmen sollen durch das Projekt für die Modernisierung der Datenplattform erhebliche Einsparungen erzielt werden, aber der Vorstand hat Sie gebeten, die Kosten verschiedener Azure-Migrationsoptionen Einsparungen so genau wie möglich zu schätzen.
 
-Hier berechnen Sie die Gesamtkosten der Migration zu Azure mithilfe des Gesamtkostenrechners.
+Hier berechnen Sie die geschätzten Kosten für die Migration zu Azure mithilfe des [Azure-Preisrechners](https://azure.microsoft.com/en-us/pricing/calculator/).
 
 Diese Übung dauert ungefähr **30** Minuten.
 
-## Berechnen der Gesamtbetriebskosten (TCO)
+## Berechnen der geschätzten Azure-Kosten
 
-1. Öffnen Sie eine neue Browserregisterkarte, und navigieren Sie zu [Azure-Gesamtkostenrechner](https://azure.microsoft.com/pricing/tco/calculator/).
-1. Löschen Sie unter der Option zum **Definieren Ihrer Workloads** alle vorhandenen Workloads im Abschnitt **Server**.
+1. Öffnen Sie eine neue Browserregisterkarte, und navigieren Sie zu [Azure-Preisrechner](https://azure.microsoft.com/en-us/pricing/calculator/).
+1. Mit dem Azure-Preisrechner können Sie die Kosten für Azure-Dienste schätzen. Wir berechnen die Kosten für die Migration Ihrer Datenbankworkload zu Azure.
 
 ## Hinzufügen des Datenbankworkloads
 
-1. Wählen Sie unter **Datenbanken** die Option **+ Datenbank hinzufügen** aus.
-1. Geben Sie in das Textfeld **Name** den Text **Ressourcenerfassung** ein.
-1. Wählen Sie im Abschnitt **Quelle** die folgenden Werte aus:
+1. Suchen Sie im Abschnitt **Produkte** nach **Azure SQL-Datenbank**, und wählen Sie diese Option aus. (Sie können die Suche nutzen oder die Kategorie **Datenbanken** durchsuchen.)
+1. Geben Sie im Konfigurationsbereich **Azure SQL-Datenbank**, der weiter unten auf der Seite angezeigt wird, die folgenden Werte ein:
 
     | Eigenschaft | Wert |
     | --- | --- |
-    | Datenbank | **Microsoft SQL Server** |
-    | Lizenz | **Enterprise** |
-    | Environment | **Physische Server** |
+    | Region | **USA, Osten** (bzw. Ihre bevorzugte Region) |
+    | Typ | **Einzeldatenbank** |
+    | Kaufmodell | **Virtueller Kern** |
+    | Dienstebene | **Allgemeiner Zweck** |
+    | Computeebene | **Bereitgestellt** |
+    | Hardwaretyp | **Standard-Serie (Gen5)** |
+    | Instanz | **4 virtuelle Kerne** |
+    | Notfallwiederherstellung | **Primäres Replikat oder Geo-Replikat** |
+    | Compute | **Lokal redundant** |
+    | Storage | **32 GB** |
+    | Sicherungsspeicher | **RA-GRS** |
+
+1. Überprüfen Sie die monatliche Kostenschätzung, die für SQL-Datenbank angezeigt wird.
+
+## Hinzufügen eines virtuellen Computers zum Vergleich
+
+1. Kehren Sie zurück zum Abschnitt **Produkte**, suchen Sie nach **Virtuelle Computer**, und wählen Sie diese Option aus.
+1. Geben Sie im Konfigurationsbereich **Virtuelle Computer** die folgenden Werte ein:
+
+    | Eigenschaft | Wert |
+    | --- | --- |
+    | Region | **USA, Osten** (genau wie für die Datenbank) |
     | Betriebssystem | **Windows** |
-    | Lizenz des Betriebssystems | **Datacenter** |
-    | Server | **1** |
-    | Prozessoren pro Server | **1** |
-    | Kern(e) pro Prozessor | **4** |
-    | RAM (GB) | **64** |
-    | Optimieren für | **CPU** |
-    | SQL Server 2008/2008R2 | **Umschalten, um diesen Wert auszuwählen** |
+    | Typ | **SQL Server** |
+    | Tarif | **Standard** |
+    | Instanz | **D4s v3** (4 vCPUs, 16 GB RAM) |
+    | Virtuelle Computer | **1** |
+    | Lizenz | **SQL Standard** |
 
-1. Wählen Sie im Abschnitt **Ziel** die folgenden Werte aus:
+1. Erweitern Sie **Verwaltete Datenträger**, und fügen Sie Folgendes hinzu:
+   - Tarif: **SSD Premium**, **128 GB**
 
-    | Eigenschaft | Wert |
-    | --- | --- |
-    | Dienst | **SQL Server-VM** |
-    | Datenträgertyp | **SSD** |
-    | IOPS | **5000** |
-    | SQL Server-Speicher | **32 GB** |
-    | SQL Server-Sicherung | **32 GB** |
+## Hinzufügen von Speicher für Sicherungen
 
-    > [!NOTE]
-    > SSD-Datenträger (Solid State Drive) werden für Produktionsworkloads in Azure empfohlen.
-
-## Hinzufügen von Speicher- und Netzwerkworkloads
-
-1. Wählen Sie unter **Speicher** die Option **+ Speicher hinzufügen** aus.
-1. Geben Sie in das Textfeld **Name** den Text **Ressourcenerfassung lokaler Datenträger** ein, und geben Sie dann die folgenden Werte ein:
+1. Suchen Sie im Abschnitt **Produkte** nach **Speicherkonten**, und wählen Sie diese Option aus.
+1. Geben Sie im Konfigurationsbereich **Speicherkonten** die folgenden Werte ein:
 
     | Eigenschaft | Wert |
     | --- | --- |
-    | Speichertyp | **Lokaler Datenträger/SAN** |
-    | Datenträgertyp | **Festplattenlaufwerk** |
-    | Capacity | **3 TB** |
-    | Backup | **1 TB** |
-    | Archivieren | **0 TB** |
+    | Region | **USA, Osten** |
+    | Typ | **Blockblobspeicher** |
+    | Leistung | **Standard** |
+    | Speicherkontotyp | **Universell V2** |
+    | Dateistruktur | **Flacher Namespace** |
+    | Zugriffsebene | **Heiße Ebene** |
+    | Redundanz | **LRS** |
+    | Capacity | **1 TB** |
 
-1. Wählen Sie unter **Netzwerk** in den Steuerelementen **Ausgehende Bandbreite** die Option **1 GB** aus.
-1. Wählen Sie unten auf der Seite die Option **Weiter** aus.
+## Überprüfen und Vergleichen von Kosten
 
-## Anpassen von Annahmen
+1. Überprüfen Sie die geschätzten monatlichen Kosten für alle Dienste, die Sie hinzugefügt haben:
+   - **SQL-Datenbank:** Kosten für verwaltete Datenbankdienste
+   - **Virtuelle Computer:** Infrastrukturkosten für SQL Server auf einer VM
+   - **Speicherkonten**: Kosten für Sicherung und zusätzliche Speicher
 
-1. Wählen Sie im Abschnitt **Anpassen von Annahmen** in der Liste **Währung** Ihre bevorzugte Währung aus.
-1. Wählen Sie unter **Software Assurance-Abdeckung (bietet Azure-Hybridvorteil)** die Option für die **Windows Server Software Assurance-Abdeckung** aus, indem Sie den Umschalter aktivieren.
-1. Wählen Sie **SQL Server Software Assurance-Abdeckung** aus, indem Sie den Umschalter aktivieren.
+1. Berücksichtigen Sie die folgenden Fragen, wenn Sie die Schätzungen überprüfen:
+   - Wie hoch sind die Kosten im Vergleich zwischen SQL-Datenbank (PaaS) und SQL Server auf einer VM (IaaS)?
+   - Was sind die Vor- und Nachteile von verwalteten Diensten gegenüber Infrastrukturdiensten?
+   - Wie können diese Kosten mit Ihren Workloadanforderungen skaliert werden?
 
-    > [!NOTE]
-    > Sie können die Links im Abschnitt **Software Assurance** verwenden, um mehr über die verfügbare Software Assurance zu erfahren. 
+1. Sie können diese Schätzung speichern, indem Sie **Speichern** oder **Exportieren**, auswählen, um sie für Projektbeteiligte freizugeben.
 
-1. Stellen Sie unter **Georedundanter Speicher (GRS)** sicher, dass **GRS repliziert Ihre Daten in eine sekundäre Region, die Hunderte von Kilometern von der primären Region entfernt ist** nicht aktiviert ist.
-1. Stellen Sie unter **Kosten virtueller Computer** sicher, dass **Aktivieren Sie dies für den Rechner, um virtuelle Computern der Bs-Serie nicht zu empfehlen** aktiviert ist.
+## Erkunden von Kostenoptimierungsoptionen
 
-    > [!NOTE]
-    > Die virtuellen Computer der B-Serie verfügen nicht über das Arbeitsspeicher-zu-vCore-Verhältnis (virtueller Kern) von 8, das für SQL Server-Workloads empfohlen wird.
+1. Erkunden Sie in jeder Dienstkonfiguration verschiedene Optionen, um zu sehen, wie sich die Kosten auswirken:
+   - **SQL-Datenbank:** Probieren Sie verschiedene Dienstebenen (Basic, Standard, Premium) und Computegrößen aus.
+   - **Virtuelle Computer:** Vergleichen Sie verschiedene VM-Größen und Speicheroptionen.
+   - **Speicher:** Vergleichen Sie verschiedene Redundanzoptionen und Zugriffsebenen.
 
-1. Geben Sie unter **Stromkosten**, im Textfeld **Preis pro KW-Stunde** einen realistischen Wert für Ihren Standort ein.
+1. Beachten Sie, wie sich das Ändern dieser Optionen auf Ihre monatliche Gesamtschätzung auswirkt.
 
-    > [!NOTE]
-    > Ungefähre Strompreise finden Sie unter [Globale Strompreise](https://www.statista.com/statistics/263492/electricity-prices-in-selected-countries/). Diese Preise sind in USD ($) angegeben. Rechnen Sie sie in einen ungefähren Wert in Ihrer bevorzugten Währung um.
+Sie haben den Azure-Preisrechner verwendet, um die Kosten für die Migration des Buchhaltungsservers der Adatum Corporation und die zugehörigen Datenbanken zu verschiedenen Azure-Diensten zu schätzen. Dadurch erhalten Sie eine Grundlage für den Vergleich von IaaS- und PaaS-Optionen (Infrastructure-as-a-Service bzw. Platform-as-a-Service) und die Planung Ihres Migrationsbudgets.
 
-1. Belassen Sie unter **Speicherkosten** alle Werte auf ihren Standardwerten oder passen Sie sie an, wenn sie unangemessen erscheinen.
-1. Belassen Sie unter **IT-Arbeitskosten** alle Werte auf ihren Standardwerten oder passen Sie sie an, wenn sie unangemessen erscheinen.
-1. Erweitern Sie unter **Sonstige Annahme** jeden Abschnitt und betrachten Sie die zugehörigen Kosten.
-1. Wählen Sie unten auf der Seite die Option **Weiter** aus.
-
-## Untersuchen des 5-Jahre-Berichts
-
-1. Beachten Sie auf der Seite **Bericht anzeigen**, dass der **Zeitrahmen** standardmäßig auf **5 Jahre** festgelegt ist.
-1. Scrollen Sie im Bericht nach unten, und untersuchen Sie die geschätzte Aufschlüsselung der Kosten für lokale Systeme und Azure. Notieren Sie sich diese Informationen.
-
-    - Was ist die wichtigste Kostenkomponente der lokalen Umgebung?
-    - Was sind die größten Kosteneinsparungen, wenn Sie sich für eine Migration zu Azure entscheiden?
-
-1. Erweitern Sie jeden Abschnitt der Reihe nach, und untersuchen Sie die Aufschlüsselung der Kosten.
-
-## Untersuchen des 3-Jahre-Berichts
-
-1. Scrollen Sie zum oberen Rand der Seite, und wählen Sie dann im Textfeld **Zeitrahmen** die Option **3 Jahre** aus.
-1. Scrollen Sie im Bericht nach unten, und untersuchen Sie die geschätzte Aufschlüsselung der Kosten für lokale Systeme und Azure. Notieren Sie sich diese Informationen.
-
-    - Was ist die wichtigste Kostenkomponente der lokalen Umgebung?
-    - Was sind die größten Kosteneinsparungen, wenn Sie sich für eine Migration zu Azure entscheiden?
-
-1. Erweitern Sie jeden Abschnitt der Reihe nach, und untersuchen Sie die Aufschlüsselung der Kosten.
-
-Sie haben den Azure-Gesamtkostenrechner verwendet, um Kostenunterschiede zwischen lokalen und Azure-Bereitstellungen für den Buchhaltungsserver der Adatum Corporation und die zugehörigen Datenbanken zu ermitteln.
