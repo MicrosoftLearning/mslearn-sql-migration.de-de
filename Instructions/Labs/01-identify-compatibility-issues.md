@@ -77,7 +77,7 @@ Sie führen die Azure-Migrationserweiterung für Azure Data Studio aus, führen 
 
 1. Wählen Sie im Azure SQL Migration-Dashboard die Option **Zu Azure SQL migrieren** aus, um den Migrations-Assistenten zu öffnen.
 
-1. Wählen Sie unter **Schritt 1: Datenbanken für die Bewertung** die *AdventureWorks*-Datenbank und dann **Weiter** aus.
+1. Wählen Sie in **Schritt 1: Datenbanken für die Bewertung**, wählen Sie **Nein** für *„Möchten Sie den Migrationsprozess im Azure-Portal nachverfolgen?“* aus, und wählen Sie dann die Datenbank *AdventureWorksLT* aus. Wählen Sie **Weiter** aus.
 
 1. In **Schritt 2: Bewertungsergebnisse und SKU-Empfehlungen** warten Sie, bis die Bewertung abgeschlossen ist, und wählen Sie **Weiter** aus.
 
